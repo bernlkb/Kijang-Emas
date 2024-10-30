@@ -32,6 +32,8 @@ dat$Model <- factor(dat$Model, levels = c("GRU", "ARIMA(1,1,0)", "ANFIS", "GBM",
 #dat$Metric <- factor(dat$Metric, levels = c("RMSE", "MSE", "MAPE(%)"))
 ```
 
+# I edit sth here
+
 # ggplot
 ```{r}
 # Top few row of data
