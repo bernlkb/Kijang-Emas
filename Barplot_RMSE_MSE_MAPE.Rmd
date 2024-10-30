@@ -1,0 +1,53 @@
+---
+title: "bar plot"
+author: "Bernard Lee"
+date: "2024-10-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Load library
+```{r}
+library(tidyverse)
+```
+
+# Load data
+```{r}
+# Load data
+dat <- read_delim("~/Documents/_Manuscript/_Publications/2024/_JQMA/__Submission/_01Reviewer_Comments/Raw_Data/dat2.txt")
+
+# change to factor for dat$Model
+dat$Model <- as.factor(dat$Model)
+
+# change to factor for dat$Metric
+dat$Metric <- as.factor(dat$Metric)
+
+# Change levels of dat$Model
+dat$Model <- factor(dat$Model, levels = c("GRU", "ARIMA(1,1,0)", "ANFIS", "GBM", "LSTM"))
+
+# Change levels of dat$Metric
+#dat$Metric <- factor(dat$Metric, levels = c("RMSE", "MSE", "MAPE(%)"))
+```
+
+# ggplot
+```{r}
+# Top few row of data
+head(dat)
+
+# Basic barplot
+ggplot(dat, aes(x=Metric, y=Value, fill=Model)) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  geom_text(aes(label = sprintf("%.2f", Value)), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.5) +
+  theme_minimal() +
+  theme(aspect.ratio = 1)+
+  scale_fill_brewer(palette="Spectral")
+```
+
+
+
+
